@@ -1,6 +1,6 @@
 # 2023 Advent of Code - Tyler Tran - Day 1
 
-defmodule MyUtils do
+defmodule Main do
   def to_digit("one") do "1e" end
   def to_digit("two") do "2o" end
   def to_digit("three") do "3e" end
@@ -13,15 +13,15 @@ defmodule MyUtils do
 
   def convert_text_numbers_to_digits(string) do
     replace_token = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    string |> String.replace(replace_token, &MyUtils.to_digit/1) |> String.replace(replace_token, &MyUtils.to_digit/1)
+    string |> String.replace(replace_token, &Main.to_digit/1) |> String.replace(replace_token, &Main.to_digit/1)
   end
 
   def extract_calibration_value(string) do
-    numbers = string |> MyUtils.convert_text_numbers_to_digits |> String.replace(~r{\D}, "")
+    numbers = string |> Main.convert_text_numbers_to_digits |> String.replace(~r{\D}, "")
     "#{numbers |> String.first}#{numbers |> String.last}" |> String.to_integer
   end
 end
 
-result = File.stream!("input.txt") |> Enum.map(&MyUtils.extract_calibration_value/1) |> Enum.sum()
+result = File.stream!("input.txt") |> Enum.map(&Main.extract_calibration_value/1) |> Enum.sum()
 
 IO.inspect(result)
